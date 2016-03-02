@@ -1,0 +1,26 @@
+web:
+    image: shaneburkhart/routines:dev
+    links:
+        - pg
+    volumes:
+        - .:/go/src/github.com/ShaneBurkhart/routines
+    command: gin run
+
+pg:
+    image: postgres
+    environment:
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=postgres
+        - POSTGRES_DB=routines
+    volumes:
+        - /data:/var/lib/postgresql/data
+
+nginx:
+    image: nginx
+    ports:
+        - "3000:80"
+    links:
+        - web
+    volumes:
+        - ./nginx.conf:/etc/nginx/nginx.conf
+        - ./public:/assets

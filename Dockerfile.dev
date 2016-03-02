@@ -1,0 +1,7 @@
+FROM shaneburkhart/routines
+
+RUN go get github.com/codegangsta/gin
+
+WORKDIR /go/src/github.com/ShaneBurkhart/routines
+
+CMD ["gin", "run"]
